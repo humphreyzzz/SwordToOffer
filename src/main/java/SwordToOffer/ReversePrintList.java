@@ -2,6 +2,7 @@ package SwordToOffer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
@@ -48,5 +49,59 @@ public class ReversePrintList {
             listNode = listNode.next;
         }
         return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public int[] reversePrintII(ListNode head) {
+        Stack<ListNode> stack = new Stack<>();
+        ListNode node = head;
+        while (node!=null){
+            stack.push(node);
+            node= node.next;
+        }
+        int len = stack.size();
+        int[] res = new int[len];
+
+        for(int i=0;i<len;i++){
+            res[i] = stack.pop().val;
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args){
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(3);
+        head.next.next = new ListNode(2);
+        System.out.println(new ReversePrintList().reversePrintII(head));
     }
 }

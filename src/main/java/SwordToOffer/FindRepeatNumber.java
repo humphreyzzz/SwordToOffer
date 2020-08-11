@@ -31,4 +31,24 @@ public class FindRepeatNumber {
         }
         return 0;
     }
+
+    public int findRepeatNumberII(int[] nums) {
+        int index = 0;
+        while (index<nums.length){
+            if(nums[index]==index) {
+                index++;
+            }
+            else{
+                if(nums[index]==nums[nums[index]]) return nums[index];
+                else{
+                    int temp = nums[index];
+                    nums[index] = nums[nums[index]];
+                    nums[temp] = temp;
+                }
+            }
+        }
+        return 0;
+    }
+
+
 }

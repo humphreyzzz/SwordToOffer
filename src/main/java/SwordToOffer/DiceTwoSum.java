@@ -29,6 +29,25 @@ package SwordToOffer;
  */
 public class DiceTwoSum {
     public double[] twoSum(int n) {
-        return null;
+        int[][] res = new int[n+1][6*n+1];
+        for(int i=1;i<7;i++){
+            res[1][i] = 1;
+        }
+        for(int i=2;i<n;i++){
+            for(int s=i;s<=6*i;s++){
+                for(int d=1;d<7;d++){
+                    if(s-d<i-1) break;
+                    res[i][s]+=res[i-1][s-d];
+                }
+            }
+        }
+        double total = Math.pow(6,n);
+        double[] ans = new double[5*n+1];
+        for(int i=n;i<=6*n;i++){
+            ans[i-n]=((double)res[n][i])/total;
+        }
+        return ans;
+
+
     }
 }

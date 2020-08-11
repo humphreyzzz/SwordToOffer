@@ -27,14 +27,31 @@ public class FindNumberIn2DArray {
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
 
         for(int[] col:matrix){
-            if(col.length==0){//考虑数组长度为0的情况，否则下面会报数组越界
+            //考虑数组长度为0的情况，否则下面会报数组越界
+            if(col.length==0){
                 return false;
             }
-            if(col[0]<=target&&col[col.length-1]>=target){//要包含相等的情况，否则[5]，查找5的情况会失败
+            //要包含相等的情况，否则[5]，查找5的情况会失败
+            if(col[0]<=target&&col[col.length-1]>=target){
                 for(int i=0;i<col.length;i++){
                     if(col[i]==target){
                         return true;
                     }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean findNumberIn2DArrayII(int[][] matrix, int target) {
+        if(matrix.length==0) return false;
+        int row =0,col = matrix[0].length-1;
+        while (row<matrix.length&&col>0){
+            if(matrix[row][col]==target) return true;
+            else{
+                if(matrix[row][col]<target) row++;
+                else{
+                    col--;
                 }
             }
         }

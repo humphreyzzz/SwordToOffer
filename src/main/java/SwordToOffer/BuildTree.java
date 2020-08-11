@@ -26,37 +26,35 @@ import java.util.Map;
  */
 public class BuildTree {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if(preorder.length==0){
+        if (preorder.length == 0) {
             return null;
         }
-        Map<Integer,Integer> inIndex = new HashMap<>();
-        for(int i=0;i<inorder.length;i++){
-            inIndex.put(inorder[i],i);
+        Map<Integer, Integer> inIndex = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            inIndex.put(inorder[i], i);
         }
-        return buildTree(preorder,0,preorder.length-1,0,inorder.length-1,inIndex);
+        return buildTree(preorder, 0, preorder.length - 1, 0, inorder.length - 1, inIndex);
     }
 
-    public TreeNode buildTree(int[] preorder,int inLeft, int inRight,int preLeft,int preRight, Map<Integer,Integer> inIndex) {
+    public TreeNode buildTree(int[] preorder, int inLeft, int inRight, int preLeft, int preRight, Map<Integer, Integer> inIndex) {
         int rootVal = preorder[inLeft];
         TreeNode root = new TreeNode(rootVal);
-        if(inLeft==inRight){
+        if (inLeft == inRight) {
             return root;
         }
         int index = inIndex.get(rootVal);
 
-        int leftLength = index-preLeft;
-        int rightLength = preRight-index;
-        if(leftLength<=0){
-            root.left=null;
+        int leftLength = index - preLeft;
+        int rightLength = preRight - index;
+        if (leftLength <= 0) {
+            root.left = null;
+        } else {
+            root.left = buildTree(preorder, inLeft + 1, inLeft + leftLength, preLeft, preLeft + leftLength - 1, inIndex);
         }
-        else{
-            root.left= buildTree(preorder,inLeft+1,inLeft+leftLength,preLeft,preLeft+leftLength-1,inIndex);
-        }
-        if(rightLength<=0){
-            root.right=null;
-        }
-        else{
-            root.right = buildTree(preorder,inLeft+leftLength+1,inLeft+leftLength+rightLength,index+1,preRight,inIndex);
+        if (rightLength <= 0) {
+            root.right = null;
+        } else {
+            root.right = buildTree(preorder, inLeft + leftLength + 1, inLeft + leftLength + rightLength, index + 1, preRight, inIndex);
         }
         return root;
     }

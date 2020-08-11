@@ -25,20 +25,14 @@ import java.util.Map;
  */
 
 public class Fib {
-    Map<Integer,Integer> fibMap = new HashMap();//java直接递归会超时，设置一个hashMap存放计算过的值，减少运算次数
-    public int fib(int n) {
-        if(fibMap.containsKey(n)){
-            return fibMap.get(n);
+    public int fib(int n){
+        int a = 0, b = 1, sum;
+        for(int i = 0; i < n; i++){
+            sum = (a + b) % 1000000007;
+            a = b;
+            b = sum;
         }
-        int result;
-        if(n<2) {
-            result = n;
-        }
-        else{
-            result =(fib(n-1)+fib(n-2))%1000000007;
-        }
-        fibMap.put(n,result);
-        return result;
+        return a;
     }
 
     public static void main(String args[]){

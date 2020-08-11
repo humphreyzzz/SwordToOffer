@@ -1,7 +1,9 @@
 package SwordToOffer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
@@ -68,5 +70,29 @@ public class LevelOrder3 {
 
         }
         return result;
+    }
+
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        if(root==null) return null;
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> res = new LinkedList<>();
+
+        queue.add(root);
+        while (queue.size()>0){
+            LinkedList<Integer> temp = new LinkedList<>();
+            for(int i = queue.size();i>0;i--){
+                TreeNode node = queue.poll();
+                if(node.left!=null) queue.add(node.left);
+                if(node.right!=null) queue.add(node.right);
+                if(res.size()%2==1){
+                    temp.addFirst(node.val);
+                }
+                else{
+                    temp.addLast(node.val);
+                }
+            }
+            res.add(temp);
+        }
+        return res;
     }
 }

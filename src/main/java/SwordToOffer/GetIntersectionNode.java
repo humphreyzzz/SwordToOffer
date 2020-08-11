@@ -45,6 +45,21 @@ public class GetIntersectionNode {
         num[i] = temp;
     }
 
+    public ListNode getIntersectionNodeII(ListNode headA, ListNode headB) {
+        ListNode tempA = headA,tempB = headB;
+        while (tempA!=tempB){
+            if(tempA == null){
+                tempA = headB;
+            }
+            if(tempB==null){
+                tempB = headA;
+            }
+            tempA = tempA.next;
+            tempB = tempB.next;
+        }
+        return tempA;
+    }
+
     public static void main(String[] args){
         int num[] = new int[]{5,4,3,2,1,2,45,6,23,23423,1};
         fastSort(num,0,10);

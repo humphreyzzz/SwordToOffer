@@ -6,14 +6,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class CountDigitOne {
     public int countDigitOne(int n) {
-        int count = 0;
-        for(int i=1;i<n;i++){
-            char[] chars = String.valueOf(i).toCharArray();
-            for(char c:chars){
-                if(c=='1') count++;
-            }
-            ReentrantLock reentrantLock = new ReentrantLock();
+        int digit = 1, res = 0;
+        int high = n/10;
+        int cur = n%10;
+        int low = 0;
+        while(high!=0||cur!=0){
+            if(cur == 0) res += high * digit;
+            else if(cur == 1) res += high * digit + low + 1;
+            else res += (high + 1) * digit;
+            low += cur * digit;
+            cur = high % 10;
+            high /= 10;
+            digit *= 10;
         }
-        return count;
+        return res;
     }
 }

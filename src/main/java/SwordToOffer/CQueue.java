@@ -1,5 +1,6 @@
 package SwordToOffer;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -40,15 +41,16 @@ public class CQueue {
     }
 
     public int deleteHead() {
-        if(stack2.size()<=0){
-            if(stack1.size()<=0) return -1;//2栈均空返回-1
-            int size = stack1.size();
-            for(int i =0;i<size;i++){//stack2空，stack1有元素，将stack1中元素压入stack2，保证顺序
-                stack2.push(stack1.pop());
+        if(!stack2.isEmpty()){
+            return stack2.pop();
+        }else{
+            if(stack1.isEmpty()) return -1;
+            while (!stack1.isEmpty()){
+                int x = stack1.pop();
+                stack2.push(x);
             }
-
+            return stack2.pop();
         }
-        return stack2.pop();//最后弹出stack2栈顶元素
     }
 
     public static void main(String args[]){
